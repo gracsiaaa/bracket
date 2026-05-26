@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a;
+  /* Background utama: Slate sangat gelap */
+  color: #e2e8f0;
+  /* Teks utama: Putih keabu-abuan */
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* =========================================
+   UI COMPONENTS (Sleek & Flat)
+========================================= */
+
+/* Ubah class 'clay-card' di HTML kamu menjadi 'panel-card' */
+.panel-card,
+.clay-card {
+  background: #1e293b;
+  /* Lebih terang dari background utama */
+  border-radius: 8px;
+  /* Konsisten tajam modern */
+  border: 1px solid #334155;
+  /* Garis elegan */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  /* Drop-shadow sangat halus */
+  padding: 1.5rem;
+}
+
+/* Tombol Profesional Baru */
+.primary-btn {
+  background-color: #3b82f6;
+  /* Warna aksen biru elektrik */
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+  /* Meredup saat hover, tidak melompat */
+}
+
+/* Form Input Standar (Dashboard) */
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  background: #0f172a;
+  /* Menyatu dengan bg utama */
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+  /* Ring tipis */
+}
+
+/* =========================================
+   BRACKET TREE SYSTEM
+========================================= */
+
+.bracket-wrapper {
+  display: flex;
+  overflow-x: auto;
+  padding: 2.5rem 1rem;
+  gap: 2.5rem;
+  align-items: stretch;
+  min-height: 50vh;
+}
+
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  position: relative;
+}
+
+.round-title {
+  text-align: center;
+  font-weight: 600;
+  color: #94a3b8;
+  /* Abu-abu redup sekunder */
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  right: 0;
+}
+
+.match-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+/* Sleek Match Box */
+.match-box {
+  background: #1e293b;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  overflow: hidden;
+  /* Memastikan garis aksen tidak keluar dari radius kotak */
+}
+
+.match-box:hover {
+  border-color: #475569;
+  /* Border sedikit lebih terang */
+  background: #233045;
+  /* Background sedikit lebih solid */
+}
+
+/* =========================================
+   CONNECTOR LINES (Tipis & Presisi)
+========================================= */
+
+/* Ketebalan 1px dengan border-radius 4px untuk sudut lengkung yang smooth */
+.bracket-round:not(:last-child) .connect-down::after {
+  content: '';
+  position: absolute;
+  right: -1.25rem;
+  top: 50%;
+  width: 1.25rem;
+  height: 50%;
+  border-top: 1px solid #475569;
+  border-right: 1px solid #475569;
+  border-top-right-radius: 4px;
+  z-index: 1;
+}
+
+.bracket-round:not(:last-child) .connect-up::after {
+  content: '';
+  position: absolute;
+  right: -1.25rem;
+  bottom: 50%;
+  width: 1.25rem;
+  height: 50%;
+  border-bottom: 1px solid #475569;
+  border-right: 1px solid #475569;
+  border-bottom-right-radius: 4px;
+  z-index: 1;
+}
+
+.bracket-round:not(:first-child) .match-wrapper::before {
+  content: '';
+  position: absolute;
+  left: -1.25rem;
+  top: 50%;
+  width: 1.25rem;
+  border-top: 1px solid #475569;
+  z-index: 1;
+}
+
+/* =========================================
+   MICRO TYPOGRAPHY & MATCH DETAILS
+========================================= */
+
+.team-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #334155;
+  font-size: 0.8rem;
+  font-weight: 400;
+  position: relative;
+  /* Wajib untuk aksen neon winner */
+}
+
+.team-row:last-child {
+  border-bottom: none;
+}
+
+.score {
+  font-weight: 600;
+}
+
+.loser {
+  color: #94a3b8;
+}
+
+/* Logika Aksen Pemenang (Sleek Mode) */
+.winner {
+  font-weight: 700;
+  color: #ffffff;
+  /* Putih solid */
+  background-color: transparent;
+  /* Tidak ada background hijau menyilaukan */
+}
+
+.winner::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #3b82f6;
+  /* Garis neon biru elektrik tipis di sisi kiri */
+}
+
+.winner-score {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+/* =========================================
+   TINY INPUTS & CONTROLS (Dalam Match Box)
+========================================= */
+
+.score-input {
+  width: 36px;
+  text-align: center;
+  border: 1px solid transparent;
+  /* Menyatu dengan background saat pasif */
+  background: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.score-input:focus {
+  background: #0f172a;
+  box-shadow: 0 0 0 1px #3b82f6;
+  /* Muncul ring biru saat diklik */
+}
+
+/* Dropdown pemilih pemenang di dalam match box */
+.match-box select {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 0.75rem;
+  outline: none;
+  width: 100%;
+}
+
+.match-box select:focus {
+  border-color: #3b82f6;
+}
