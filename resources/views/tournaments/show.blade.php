@@ -31,7 +31,14 @@
                 <h1 class="text-2xl font-bold text-slate-100">{{ $tournament->name }}</h1>
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">Game: {{ $tournament->game }} | Status: <span class="{{ $tournament->status == 'completed' ? 'text-green-500' : 'text-blue-500' }}">{{ $tournament->status }}</span></p>
             </div>
-            <a href="{{ route('tournaments.public', $tournament->id) }}" target="_blank" class="primary-btn !bg-slate-700 text-white">Live View &rarr;</a>
+            
+            <div class="flex gap-2">
+                <button onclick="copyLink(this, '{{ route('tournaments.public', $tournament->id) }}')" class="primary-btn !bg-slate-700 text-white flex items-center gap-2 hover:!bg-slate-600 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                    <span>Copy Link</span>
+                </button>
+                <a href="{{ route('tournaments.public', $tournament->id) }}" target="_blank" class="primary-btn !bg-blue-600 text-white">Live View &rarr;</a>
+            </div>
         </div>
 
         @if(session('success'))
@@ -145,5 +152,29 @@
             </div>
         @endif
     </div>
+
+    <script>
+        function copyLink(button, url) {
+            const fullUrl = window.location.origin + url;
+            
+            navigator.clipboard.writeText(fullUrl).then(() => {
+                const textSpan = button.querySelector('span');
+                const originalText = textSpan.innerText;
+                
+                textSpan.innerText = 'Copied!';
+                button.classList.remove('!bg-slate-700');
+                button.classList.add('!bg-green-600');
+                
+                setTimeout(() => {
+                    textSpan.innerText = originalText;
+                    button.classList.remove('!bg-green-600');
+                    button.classList.add('!bg-slate-700');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Gagal menyalin link.');
+            });
+        }
+    </script>
 </body>
 </html>

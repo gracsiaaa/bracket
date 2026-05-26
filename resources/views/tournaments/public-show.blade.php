@@ -10,7 +10,14 @@
 <body>
     <div class="max-w-[95vw] mx-auto p-6">
         <div class="text-center relative">
-            <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 absolute left-0 top-2">&larr; Main Menu</a>
+            <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 absolute left-0 top-2 hidden md:inline-block">&larr; Main Menu</a>
+            <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 absolute left-0 top-2 md:hidden">&larr;</a>
+            
+            <button onclick="copyLink(this, window.location.href)" class="primary-btn !bg-slate-800 text-slate-300 border border-slate-700 absolute right-0 top-2 flex items-center gap-2 hover:!bg-slate-700 hover:text-white transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                <span class="hidden sm:inline-block">Share Bracket</span>
+            </button>
+
             <h1 class="text-3xl font-extrabold text-slate-100 tracking-tight">{{ $tournament->name }}</h1>
             <div class="inline-flex mt-3 bg-slate-800 border border-slate-700 rounded-full px-4 py-1.5 text-xs font-semibold text-slate-300 uppercase shadow-sm">
                 <span>🎮 {{ $tournament->game }}</span>
@@ -76,5 +83,26 @@
             </div>
         @endif
     </div>
+
+    <script>
+        function copyLink(button, fullUrl) {
+            navigator.clipboard.writeText(fullUrl).then(() => {
+                const textSpan = button.querySelector('span');
+                const originalText = textSpan.innerText;
+                
+                textSpan.innerText = 'Copied!';
+                button.classList.remove('!bg-slate-800', 'text-slate-300');
+                button.classList.add('!bg-green-600', 'text-white', 'border-green-500');
+                
+                setTimeout(() => {
+                    textSpan.innerText = originalText;
+                    button.classList.remove('!bg-green-600', 'text-white', 'border-green-500');
+                    button.classList.add('!bg-slate-800', 'text-slate-300');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
