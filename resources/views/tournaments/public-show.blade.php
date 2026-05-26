@@ -84,23 +84,28 @@
         @endif
     </div>
 
-    <script>
-        function copyLink(button, fullUrl) {
-            navigator.clipboard.writeText(fullUrl).then(() => {
+<script>
+        function copyLink(button, urlToCopy) {
+            navigator.clipboard.writeText(urlToCopy).then(() => {
                 const textSpan = button.querySelector('span');
                 const originalText = textSpan.innerText;
                 
                 textSpan.innerText = 'Copied!';
-                button.classList.remove('!bg-slate-800', 'text-slate-300');
+                button.classList.remove('!bg-slate-700', '!bg-slate-800', 'text-slate-300');
                 button.classList.add('!bg-green-600', 'text-white', 'border-green-500');
                 
                 setTimeout(() => {
                     textSpan.innerText = originalText;
                     button.classList.remove('!bg-green-600', 'text-white', 'border-green-500');
-                    button.classList.add('!bg-slate-800', 'text-slate-300');
+                    if(urlToCopy.includes('public')) {
+                        button.classList.add('!bg-slate-800', 'text-slate-300');
+                    } else {
+                        button.classList.add('!bg-slate-700');
+                    }
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy: ', err);
+                alert('Browser tidak mengizinkan akses clipboard.');
             });
         }
     </script>
