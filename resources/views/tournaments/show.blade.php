@@ -25,19 +25,21 @@
 </head>
 <body>
     <div class="max-w-[95vw] mx-auto p-6">
-        <div class="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
-            <a href="{{ route('tournaments.index') }}" class="primary-btn !bg-slate-700">&larr; Back to Panel</a>
-            <div class="text-center">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-slate-700 pb-4 gap-4 md:gap-0">
+            <div class="w-full md:w-auto order-3 md:order-1">
+                <a href="{{ route('tournaments.index') }}" class="primary-btn !bg-slate-700 w-full text-center block">&larr; Back to Panel</a>
+            </div>
+            <div class="text-center w-full md:w-auto order-1 md:order-2">
                 <h1 class="text-2xl font-bold text-slate-100">{{ $tournament->name }}</h1>
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">Game: {{ $tournament->game }} | Status: <span class="{{ $tournament->status == 'completed' ? 'text-green-500' : 'text-blue-500' }}">{{ $tournament->status }}</span></p>
             </div>
             
-            <div class="flex gap-2">
-                <button onclick="copyLink(this, '{{ route('tournaments.public', $tournament->id) }}')" class="primary-btn !bg-slate-700 text-white flex items-center gap-2 hover:!bg-slate-600 transition">
+            <div class="flex gap-2 w-full md:w-auto order-2 md:order-3">
+                <button onclick="copyLink(this, '{{ route('tournaments.public', $tournament->id) }}')" class="primary-btn !bg-slate-700 text-white flex-1 md:flex-none justify-center items-center gap-2 hover:!bg-slate-600 transition flex">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
                     <span>Copy Link</span>
                 </button>
-                <a href="{{ route('tournaments.public', $tournament->id) }}" target="_blank" class="primary-btn !bg-blue-600 text-white">Live View &rarr;</a>
+                <a href="{{ route('tournaments.public', $tournament->id) }}" target="_blank" class="primary-btn !bg-blue-600 text-white flex-1 md:flex-none text-center">Live View &rarr;</a>
             </div>
         </div>
 

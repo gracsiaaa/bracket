@@ -9,20 +9,25 @@
 </head>
 <body>
     <div class="max-w-[95vw] mx-auto p-6">
-        <div class="text-center relative">
-            <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 absolute left-0 top-2 hidden md:inline-block">&larr; Main Menu</a>
-            <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 absolute left-0 top-2 md:hidden">&larr;</a>
+        <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 md:gap-0">
+            <div class="w-full md:w-auto order-3 md:order-1">
+                <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 w-full text-center block">&larr; Main Menu</a>
+            </div>
             
-            <button onclick="copyLink(this, window.location.href)" class="primary-btn !bg-slate-800 text-slate-300 border border-slate-700 absolute right-0 top-2 flex items-center gap-2 hover:!bg-slate-700 hover:text-white transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-                <span class="hidden sm:inline-block">Share Bracket</span>
-            </button>
+            <div class="text-center w-full md:w-auto order-1 md:order-2">
+                <h1 class="text-3xl font-extrabold text-slate-100 tracking-tight">{{ $tournament->name }}</h1>
+                <div class="inline-flex mt-3 bg-slate-800 border border-slate-700 rounded-full px-4 py-1.5 text-xs font-semibold text-slate-300 uppercase shadow-sm">
+                    <span>🎮 {{ $tournament->game }}</span>
+                    <span class="mx-3 text-slate-600">|</span>
+                    <span class="{{ $tournament->status == 'completed' ? 'text-green-500' : 'text-blue-500' }}">{{ $tournament->status }}</span>
+                </div>
+            </div>
 
-            <h1 class="text-3xl font-extrabold text-slate-100 tracking-tight">{{ $tournament->name }}</h1>
-            <div class="inline-flex mt-3 bg-slate-800 border border-slate-700 rounded-full px-4 py-1.5 text-xs font-semibold text-slate-300 uppercase shadow-sm">
-                <span>🎮 {{ $tournament->game }}</span>
-                <span class="mx-3 text-slate-600">|</span>
-                <span class="{{ $tournament->status == 'completed' ? 'text-green-500' : 'text-blue-500' }}">{{ $tournament->status }}</span>
+            <div class="w-full md:w-auto order-2 md:order-3">
+                <button onclick="copyLink(this, window.location.href)" class="primary-btn !bg-slate-800 text-slate-300 border border-slate-700 w-full justify-center flex items-center gap-2 hover:!bg-slate-700 hover:text-white transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                    <span>Share Bracket</span>
+                </button>
             </div>
         </div>
 

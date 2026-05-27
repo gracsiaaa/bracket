@@ -9,16 +9,16 @@
 </head>
 <body>
     <div class="max-w-6xl mx-auto p-8 pt-10">
-        <div class="flex justify-between items-center mb-10 border-b border-slate-700 pb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 border-b border-slate-700 pb-6 gap-4 sm:gap-0">
             <div>
                 <h1 class="text-3xl font-extrabold text-slate-100 tracking-tight">Dashboard</h1>
                 <p class="text-sm font-medium text-slate-400 mt-1">Operator: {{ Auth::user()->username }}</p>
             </div>
-            <div class="flex gap-3">
-                <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700">Main Menu</a>
-                <form action="{{ route('logout') }}" method="POST">
+            <div class="flex gap-3 w-full sm:w-auto">
+                <a href="{{ route('landing') }}" class="primary-btn !bg-slate-700 flex-1 sm:flex-none text-center">Main Menu</a>
+                <form action="{{ route('logout') }}" method="POST" class="flex-1 sm:flex-none flex">
                     @csrf
-                    <button type="submit" class="primary-btn !bg-red-600">Sign Out</button>
+                    <button type="submit" class="primary-btn !bg-red-600 w-full text-center">Sign Out</button>
                 </form>
             </div>
         </div>
